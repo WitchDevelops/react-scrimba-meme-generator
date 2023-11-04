@@ -3,6 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
   --main-color: #624FC1;
+  --main-active: #646cff;
   --background-color: #f5f5f5;
   --ligh-grey: #ccc;
   --font-regular: 400;
@@ -40,12 +41,21 @@ button {
   transition: all 0.25s;
 }
 button:hover {
-  border-color: #646cff;
-  background-color: #646cff;
+  border-color: var(--main-active);
+  background-color: var(--main-active);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
+a {
+  text-decoration: none;
+  color: var(--main-color);
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.25s;
+  &:hover {
+    color: var(--main-active);
+    border-bottom: 1px solid var(--main-active);
+  }
+}
