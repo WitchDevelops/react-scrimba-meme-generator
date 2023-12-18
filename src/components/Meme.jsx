@@ -14,9 +14,16 @@ const Meme = () => {
     return (
         <main className="main">
             <div className="form">
-                <div className="form__inputs">
-                    <input type="text" className="form__input" placeholder="Top text"></input>
-                    <input type="text" className="form__input" placeholder="Bottom text"></input>
+                <div className="form__inputsCtn">
+                    <div className="form__inputs">
+                        <label htmlFor="top text">Top text</label>
+                        <input type="text" className="form__input" placeholder="Top text" name="top text"></input>
+                    </div>
+                    <div className="form__inputs">
+                        <label htmlFor="bottom text">Bottom text</label>
+                        <input type="text" className="form__input" placeholder="Bottom text" name="bottom text"></input>
+                    </div>
+
                 </div>
 
                 <button
