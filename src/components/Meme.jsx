@@ -31,17 +31,26 @@ const Meme = () => {
     return (
         <main className="main">
             <div className="form">
-                <div className="form__inputs">
+                <div className="form__inputsCtn">
+                    <div className="form__inputs">
+                       <label htmlFor="topText">
+                        Top text
+                    </label>
                     <input 
-                        type="text" 
+                        type="text"
                         className="form__input" 
                         placeholder="Top text" 
                         name="topText"
                         maxLength={20} 
                         value={meme.topText}
                         onChange={handleChange}>
-                    </input>
-                    <input 
+                    </input> 
+                    </div>
+                    <div className="form__inputs">
+                        <label htmlFor="bottomText">
+                            Bottom text
+                        </label>
+                        <input 
                         type="text" 
                         className="form__input" 
                         placeholder="Bottom text" 
@@ -50,6 +59,8 @@ const Meme = () => {
                         value={meme.bottomText}
                         onChange={handleChange}>
                     </input>
+                    </div>
+                    
                 </div>
 
                 <button
