@@ -43,3 +43,51 @@
     justify-content: center;
     gap: 8px;
 }
+
+.meme {
+    position: relative;
+}
+
+.meme__image {
+    width: 100%;
+}
+.meme__text--top,
+.meme__text--bottom {
+    color: #FFF;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+    overflow: hidden;
+    text-shadow: 
+        var(--main-dark) 3px 0px 0px, 
+        var(--main-dark) 2.83487px 0.981584px 0px, 
+        var(--main-dark) 2.35766px 1.85511px 0px, 
+        var(--main-dark) 1.62091px 2.52441px 0px, 
+        var(--main-dark) 0.705713px 2.91581px 0px, 
+        var(--main-dark) -0.287171px 2.98622px 0px, 
+        var(--main-dark) -1.24844px 2.72789px 0px, 
+        var(--main-dark) -2.07227px 2.16926px 0px, 
+        var(--main-dark) -2.66798px 1.37182px 0px, 
+        var(--main-dark) -2.96998px 0.42336px 0px, 
+        var(--main-dark) -2.94502px -0.571704px 0px, 
+        var(--main-dark) -2.59586px -1.50383px 0px, 
+        var(--main-dark) -1.96093px -2.27041px 0px, 
+        var(--main-dark) -1.11013px -2.78704px 0px, 
+        var(--main-dark) -0.137119px -2.99686px 0px, 
+        var(--main-dark) 0.850987px -2.87677px 0px, 
+        var(--main-dark) 1.74541px -2.43999px 0px, 
+        var(--main-dark) 2.44769px -1.73459px 0px, 
+        var(--main-dark) 2.88051px -0.838247px 0px;
+    }
+    .meme__text--top {
+        top: 1%;
+    }
+
+    .meme__text--bottom {
+        bottom: 1%;
+    }
