@@ -2,37 +2,33 @@ import { useState, useEffect, useId } from "react";
 import "./Meme.css";
 
 const Meme = () => {
-    const [topText, setTopText] = useState();
+    const [topText, setTopText] = useState('');
+    const [bottomText, setBottomText] = useState('');
+    const [meme, setMeme] = useState({});
+    const [catImageUrl, setCatImageUrl] = useState('');
     const id = useId();
-    const [allMemeImages, setAllMemeImages] = useState([]);
 
-    // get a first image so the field it's not empty
-    const [meme, setMeme] = useState({
-        topText: setTopText,
-        bottomText: "",
-        randomImage: "http://i.imgflip.com/1bij.jpg"
-    });
-
-    // call the API to get meme images
     useEffect(() => {
-        async function getMemes() {
-            const res = await fetch("https://api.imgflip.com/get_memes");
-            const data = await res.json();
-            setAllMemeImages(data.data.memes);
-        }
-        getMemes();
-    }, []);
+        // Fetch and set the initial random cat image when the component mounts
+        getRandomCatImage();
+    }, []); // Empty dependency array ensures this effect runs only once on mount
 
-    // get a new random image upon clicking the button
-    const getNewImage = () => {
-        const memes = allMemeImages;
-        const randomNumber = Math.floor(Math.random() * memes.length);
-        const url = memes[randomNumber].url;
-        setMeme(prevMeme => ({
-            ...prevMeme,
-            randomImage: url
-        }));
+    const getRandomCatImage = async () => {
+        try {
+            const response = await fetch('https://api.thecatapi.com/v1/images/search');
+            const data = await response.json();
+            const randomCat = data[0];
+            setCatImageUrl(randomCat.url);
+        } catch (error) {
+            console.error('Error fetching random cat image:', error);
+        }
     }
+    
+    // click event handler
+    const handleButtonClick = () => {
+        // Fetch a new random cat image when the button is clicked
+        getRandomCatImage();
+      };
 
     // handleChange to see what we're typing in the input fields
     const handleChange = (event) => {
@@ -83,14 +79,14 @@ const Meme = () => {
                 <button
                     type="submit"
                     className="form__button"
-                    onClick={getNewImage}>
+                    onClick={handleButtonClick}>
                     Get a new meme image
                     <span className="material-symbols-outlined">
                         question_exchange
                     </span>
                 </button>
                 <div className="meme">
-                    <img src={meme.randomImage} className="meme__image"></img>
+                    <img src={catImageUrl} className="meme__image" alt="random cat"></img>
                     <h2 className="meme__text--top">{meme.topText}</h2>
                     <h2 className="meme__text--bottom">{meme.bottomText}</h2>
                 </div>
