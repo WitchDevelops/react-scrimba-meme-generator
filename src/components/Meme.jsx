@@ -12,16 +12,19 @@ const Meme = () => {
         bottomText: "",
         randomImage: "http://i.imgflip.com/1bij.jpg"
     });
-    
+
     // call the API to get meme images
     useEffect(() => {
-        fetch("https://api.imgflip.com/get_memes")
-            .then(res => res.json())
-            .then(data => setAllMemeImages(data.data.memes))
+        async function getMemes() {
+            const res = await fetch("https://api.imgflip.com/get_memes");
+            const data = await res.json();
+            setAllMemeImages(data.data.memes);
+        }
+        getMemes();
     }, []);
 
     // get a new random image upon clicking the button
-    const handleClick = () => {
+    const getNewImage = () => {
         const memes = allMemeImages;
         const randomNumber = Math.floor(Math.random() * memes.length);
         const url = memes[randomNumber].url;
@@ -68,7 +71,7 @@ const Meme = () => {
                             className="form__input"
                             placeholder="Bottom text"
                             name="bottomText"
-                            id = {id + "-bottomText"}
+                            id={id + "-bottomText"}
                             maxLength={20}
                             value={meme.bottomText}
                             onChange={handleChange}>
@@ -80,7 +83,7 @@ const Meme = () => {
                 <button
                     type="submit"
                     className="form__button"
-                    onClick={handleClick}>
+                    onClick={getNewImage}>
                     Get a new meme image
                     <span className="material-symbols-outlined">
                         question_exchange
@@ -91,7 +94,6 @@ const Meme = () => {
                     <h2 className="meme__text--top">{meme.topText}</h2>
                     <h2 className="meme__text--bottom">{meme.bottomText}</h2>
                 </div>
-
             </div>
         </main>
     )
