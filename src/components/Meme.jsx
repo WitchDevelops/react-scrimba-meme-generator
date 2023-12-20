@@ -1,19 +1,28 @@
-import { useState, useId } from "react";
-import memesData from "../memesData";
+import { useState, useEffect, useId } from "react";
 import "./Meme.css";
 
 const Meme = () => {
     const [topText, setTopText] = useState();
+    const id = useId();
+    const [allMemeImages, setAllMemeImages] = useState([]);
+
+    // get a first image so the field it's not empty
     const [meme, setMeme] = useState({
         topText: setTopText,
         bottomText: "",
         randomImage: "http://i.imgflip.com/1bij.jpg"
     });
-    const [allMemeImages, setAllMemeImages] = useState(memesData);
-    const id = useId();
+    
+    // call the API to get meme images
+    useEffect(() => {
+        fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then(data => setAllMemeImages(data.data.memes))
+    }, []);
 
+    // get a new random image upon clicking the button
     const handleClick = () => {
-        const memes = memesData.data.memes;
+        const memes = allMemeImages;
         const randomNumber = Math.floor(Math.random() * memes.length);
         const url = memes[randomNumber].url;
         setMeme(prevMeme => ({
@@ -22,6 +31,7 @@ const Meme = () => {
         }));
     }
 
+    // handleChange to see what we're typing in the input fields
     const handleChange = (event) => {
         const { name, value } = event.target;
         setMeme(prevMeme => ({
